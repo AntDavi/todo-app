@@ -1,50 +1,52 @@
-# React + TypeScript + Vite
+# My-Todo-App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My-Todo-App é uma aplicação de gerenciamento de tarefas que permite ao usuário adicionar, atualizar, e remover tarefas, além de filtrá-las por estado de conclusão e data limite. O projeto foi desenvolvido com foco em boas práticas de usabilidade e design responsivo.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: Biblioteca JavaScript para a construção de interfaces de usuário.
+- **TypeScript**: Superset do JavaScript que adiciona tipagem estática ao código.
+- **Vite**: Ferramenta de desenvolvimento para frontend que proporciona um build rápido e otimizado.
+- **JSON Server**: Ferramenta para criação de uma API REST falsa rapidamente para desenvolvimento frontend.
+- **Axios**: Cliente HTTP baseado em promessas para o navegador e node.js.
+- **Lucide Icons**: Biblioteca de ícones de código aberto para aplicações modernas.
+- **Tailwind CSS**: Framework de CSS para design rápido e customizável.
+- **ShadCn**: Biblioteca de componentes UI para um desenvolvimento rápido.
 
-## Expanding the ESLint configuration
+## Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Adicionar, editar e remover tarefas.
+- Filtrar tarefas por estado (em andamento ou concluídas) e por data limite.
+- Buscar tarefas por título.
+- Interface responsiva e intuitiva.
 
-- Configure the top-level `parserOptions` property like this:
+## Como Inicializar a Aplicação Localmente
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Siga os passos abaixo para configurar e rodar o projeto em sua máquina local:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Pré-requisitos
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Node.js (versão 14 ou superior)
+- npm (gerenciador de pacotes do Node.js)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Passo a Passo
+
+1. **Clone o repositório:**
+
+   Abra o terminal e execute o seguinte comando para clonar o repositório para o seu computador:
+
+   ```bash
+   git clone https://github.com/AntDavi/todo-app
+2. **Execulte o projeto:**
+
+   ```bash
+   cd tod-app
+
+   //Intalação das dependencias
+   npm install
+
+   // Para execultar o projeto
+   npm run dev
+
+   // Para execultar o servidor
+   npm run start:server

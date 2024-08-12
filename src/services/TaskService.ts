@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Task } from '../interfaces/task';
+import { Task } from '../interfaces/Task';
 
 const api = axios.create({
     baseURL: 'http://localhost:3001',

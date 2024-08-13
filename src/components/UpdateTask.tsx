@@ -21,16 +21,19 @@ interface UpdateTaskProps {
 }
 
 export default function UpdateTask({ task, onUpdate }: UpdateTaskProps) {
+    // Estado local para gerenciar os valores dos campos de edição
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [dueDate, setDueDate] = useState(task.dueDate);
 
+    // Função para lidar com a submissão do formulário
     const handleSubmit = () => {
         if (!title || !dueDate) {
             alert('Título e data de vencimento são obrigatórios!');
             return;
         }
 
+        // Atualiza a tarefa com os novos valores
         onUpdate({ ...task, title, description, dueDate });
     };
 

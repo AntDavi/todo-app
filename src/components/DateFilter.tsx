@@ -13,6 +13,7 @@ interface DateFilterProps {
 }
 
 export default function DateFilter({ onFilterChange }: DateFilterProps) {
+    // Função para lidar com a mudança de filtro
     const handleChange = (value: string) => {
         onFilterChange(value as 'nearestDeadline' | 'farthestDeadline');
     };

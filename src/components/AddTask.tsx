@@ -40,6 +40,7 @@ interface AddTaskProps {
 }
 
 export default function AddTask({ onAdd }: AddTaskProps) {
+    // Configuração do formulário com validação
     const form = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -49,6 +50,7 @@ export default function AddTask({ onAdd }: AddTaskProps) {
         },
     });
 
+    // Função para submeter o formulário
     const onSubmit = (data: FormData) => {
         onAdd({
             ...data,
@@ -59,6 +61,7 @@ export default function AddTask({ onAdd }: AddTaskProps) {
         form.reset(); // Limpa o formulário após a submissão
     };
 
+    // Função para lidar com o fechamento do Drawer
     const handleDrawerClose = () => {
         form.reset(); // Limpa o formulário ao fechar o Drawer
     };
@@ -123,7 +126,7 @@ export default function AddTask({ onAdd }: AddTaskProps) {
                             />
 
                             <DrawerFooter>
-                                <Button type="submit" onClick={() => toast("Tarefa adicionada a lista! ✅")}>Adicionar</Button>
+                                <Button type="submit" onClick={() => toast("Tarefa adicionada à lista! ✅")}>Adicionar</Button>
                                 <DrawerClose asChild>
                                     <Button variant="outline" onClick={handleDrawerClose}>
                                         Cancelar

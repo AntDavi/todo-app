@@ -8,6 +8,7 @@ interface SearchInputProps {
 }
 
 export default function SearchInput({ onSearch }: SearchInputProps) {
+    // Estado local para armazenar o valor do input
     const [inputValue, setInputValue] = useState<string>('');
 
     // Atualiza o estado interno do componente quando o valor do input muda

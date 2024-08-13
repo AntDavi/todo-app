@@ -10,13 +10,17 @@ import { getTasks, createTask, updateTask, deleteTask } from './services/TaskSer
 import EmptyData from './assets/empty.svg';
 
 function App() {
+  // Estado para armazenar as tarefas
   const [tasks, setTasks] = useState<Task[]>([]);
+  // Estado para armazenar o estado de filtro ativo (pendente ou concluído)
   const [filterState, setFilterState] = useState<'pending' | 'completed'>('pending');
+  // Estado para armazenar o filtro de deadline (mais próximo ou mais distante)
   const [filterDeadline, setFilterDeadline] = useState<'nearestDeadline' | 'farthestDeadline'>('nearestDeadline');
+  // Estado para armazenar o termo de busca
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
-    // Fetch tasks when the component mounts
+    // Busca as tarefas quando o componente é montado
     const fetchTasks = async () => {
       const fetchedTasks = await getTasks();
       setTasks(fetchedTasks);
@@ -25,13 +29,13 @@ function App() {
     fetchTasks();
   }, []);
 
-  // Function to add a new task
+  // Função para adicionar uma nova tarefa
   const handleAddTask = async (newTask: Omit<Task, 'id'>) => {
     const addedTask = await createTask(newTask);
     setTasks((prevTasks) => [...prevTasks, addedTask]);
   };
 
-  // Function to update an existing task
+  // Função para atualizar uma tarefa existente
   const handleUpdateTask = async (updatedTask: Task) => {
     const updated = await updateTask(updatedTask);
     setTasks((prevTasks) =>
@@ -39,7 +43,7 @@ function App() {
     );
   };
 
-  // Function to delete a task
+  // Função para excluir uma tarefa
   const handleDeleteTask = async (taskId: number) => {
     await deleteTask(taskId);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -50,6 +54,7 @@ function App() {
     filterState === 'pending' ? !task.completed : task.completed
   );
 
+  // Filtra as tarefas com base no termo de busca
   const searchedTasks = filteredTasks.filter((task) =>
     task.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -72,11 +77,15 @@ function App() {
         {/* ToolBar */}
         <div className="flex items-center justify-between gap-2 flex-col space-y-2 pb-5 border-b border-solid">
           <h1 className='text-2xl font-bold text-primary'>My ToDo-App</h1>
+          {/* Busca de Task */}
           <SearchInput onSearch={setSearchTerm} />
+
           <div className="flex justify-between items-center w-full max-w-[600px] gap-3">
+            {/* Filtro de Deadline */}
             <div className='w-full'>
               <DateFilter onFilterChange={setFilterDeadline} />
             </div>
+            {/* Filtro de estado */}
             <div className='w-full flex gap-3 justify-end'>
               <Button
                 variant='ghost'
@@ -96,20 +105,22 @@ function App() {
           </div>
         </div>
 
-        {/* List tasks */}
-        {/* Aqui as tasks serão rederizadas */}
+        {/* Lista de tarefas */}
+        {/* Aqui as tarefas serão renderizadas */}
         <div className="mt-6 pb-10 gap-3 flex items-center justify-center flex-col">
           {sortedTasks.length > 0 ? (
             sortedTasks.map((task) => (
               <TaskItem key={task.id} task={task} onDelete={handleDeleteTask} onUpdate={handleUpdateTask} />
             ))
           ) : searchTerm ? (
+            // Estado de Pesquisa Incorreta ou Inconclusiva
             <div className='w-full max-[600px] flex items-center justify-center flex-col h-[300px]'>
               <img src={EmptyData} alt="No data" className='size-32' />
               <p className='font-semibold text-xl mt-3 text-gray-500'>Nada foi encontrado com esse nome</p>
               <p className='font-medium text-sm text-gray-500'>Tente buscar por outro termo</p>
             </div>
           ) : (
+            // Estado de Lista Vazia
             <div className='w-full max-[600px] flex items-center justify-center flex-col h-[300px]'>
               <img src={EmptyData} alt="No data" className='size-32' />
               <p className='font-semibold text-xl mt-3 text-gray-500'>Você ainda não possui tarefas cadastradas.</p>
@@ -118,7 +129,7 @@ function App() {
           )}
         </div>
 
-        {/* Form Add Task */}
+        {/* Formulário para adicionar tarefa */}
         <div className="fixed bottom-5 right-5">
           <AddTask onAdd={handleAddTask} />
         </div>

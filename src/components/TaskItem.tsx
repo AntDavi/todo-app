@@ -1,9 +1,10 @@
-import { CalendarIcon, TrashIcon } from 'lucide-react';
+import { CalendarIcon } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Task } from '../interfaces/Task';
 import { toast } from 'sonner';
 import UpdateTask from './UpdateTask';
+import { ConfirmDeletion } from './ConfirmDeletion';
 
 interface TaskItemProps {
     task: Task;
@@ -12,11 +13,12 @@ interface TaskItemProps {
 }
 
 export default function TaskItem({ task, onDelete, onUpdate }: TaskItemProps) {
+    // Função para lidar com a alteração do estado de conclusão da tarefa
     const handleCheckboxChange = () => {
         onUpdate({ ...task, completed: !task.completed });
     };
 
-    // Formata a data de criação para um formato legível
+    // Função para formatar a data de criação
     const formatDate = (dateString: string) => {
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',
@@ -35,7 +37,7 @@ export default function TaskItem({ task, onDelete, onUpdate }: TaskItemProps) {
                     <div className='flex items-center justify-between'>
                         <CardTitle>{task.title}</CardTitle>
 
-                        {/* Checkbox ao marcada muda o status da Task de false para true */}
+                        {/* Checkbox para marcar a tarefa como concluída */}
                         {!task.completed && (
                             <input
                                 type="checkbox"
@@ -50,22 +52,20 @@ export default function TaskItem({ task, onDelete, onUpdate }: TaskItemProps) {
                 <p>{task.description}</p>
             </CardContent>
             <CardFooter className='flex justify-between items-center'>
-                {/* Data de criação */}
+                {/* Exibição da data de criação da tarefa */}
                 <div className='gap-2 flex items-center text-gray-500'>
                     <CalendarIcon size={18} />
-                    <span className='font-semibold'>{formatDate(task.createdAt)}</span> {/* Aqui você pode ajustar para mostrar a data de criação real */}
+                    <span className='font-semibold'>{formatDate(task.createdAt)}</span>
                 </div>
                 <div className='flex items-center gap-2'>
-                    {/* Editar Task */}
+                    {/* Botão para editar a tarefa */}
                     {!task.completed && (
                         <Button variant='default' size='icon'>
                             <UpdateTask task={task} onUpdate={onUpdate} />
                         </Button>
                     )}
-                    {/* Deletar Task do Banco de dados */}
-                    <Button variant='destructive' size='icon' onClick={() => onDelete(task.id)}>
-                        <TrashIcon size={18} />
-                    </Button>
+                    {/* Botão para deletar a tarefa */}
+                    <ConfirmDeletion taskId={task.id} onDelete={onDelete}/>
                 </div>
             </CardFooter>
         </Card>

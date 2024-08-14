@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
     Drawer,
     DrawerClose,
@@ -10,7 +10,7 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "./ui/drawer";
 import { PlusIcon } from "lucide-react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
@@ -23,7 +23,6 @@ import {
     FormLabel,
     FormMessage,
 } from "./ui/form";
-
 import { toast } from 'sonner';
 
 // Definindo o esquema de validação com Zod
@@ -54,8 +53,9 @@ export default function AddTask({ onAdd }: AddTaskProps) {
     const onSubmit = async (data: FormData) => {
         // Adiciona a tarefa e aguarda a conclusão
         await onAdd({
-            ...data,
+            title: data.title, // Garante que title seja passado
             description: data.description ?? "", // Garante que a descrição seja uma string
+            dueDate: data.dueDate, // Garante que dueDate seja passado
             completed: false,
             createdAt: new Date().toISOString(),
         });

@@ -65,6 +65,15 @@ Siga os passos abaixo para configurar e rodar o projeto em sua máquina local:
    $ npm run start:server
    ```
 
+3. **Para execultar testes**
+
+   ```bash
+   #Execução
+   $ npm run test
+   ```
+
+   Para adicionar mais testes basta acrescentar em src/test um arquivo [NOME_DO_COMPONENTE].test.(ts|tsx)
+
 ## 📝 Licensa
 
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para obter mais detalhes.

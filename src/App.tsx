@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import AddTask from '@/components/AddTask';
-import SearchInput from '@/components/SearchInput';
-import TaskItem from '@/components/TaskItem';
-import { Button } from '@/components/ui/button';
+import AddTask from './components/AddTask';
+import SearchInput from './components/SearchInput';
+import TaskItem from './components/TaskItem';
+import { Button } from './components/ui/button';
 import DateFilter from './components/DateFilter';
 import { Task } from './interfaces/Task';
 import { getTasks, createTask, updateTask, deleteTask } from './services/TaskService';
-
-import EmptyData from './assets/empty.svg';
 
 function App() {
   // Estado para armazenar as tarefas
@@ -115,14 +113,14 @@ function App() {
           ) : searchTerm ? (
             // Estado de Pesquisa Incorreta ou Inconclusiva
             <div className='w-full max-[600px] flex items-center justify-center flex-col h-[300px]'>
-              <img src={EmptyData} alt="No data" className='size-32' />
+              <img src='./assets/empty.svg' alt="No data" className='size-32' />
               <p className='font-semibold text-xl mt-3 text-gray-500'>Nada foi encontrado com esse nome</p>
               <p className='font-medium text-sm text-gray-500'>Tente buscar por outro termo</p>
             </div>
           ) : (
             // Estado de Lista Vazia
             <div className='w-full max-[600px] flex items-center justify-center flex-col h-[300px]'>
-              <img src={EmptyData} alt="No data" className='size-32' />
+              <img src='./assets/empty.svg' alt="No data" className='size-32' />
               <p className='font-semibold text-xl mt-3 text-gray-500'>Você ainda não possui tarefas cadastradas.</p>
               <p className='font-medium text-sm'>Adicione uma nova tarefa para começar!</p>
             </div>

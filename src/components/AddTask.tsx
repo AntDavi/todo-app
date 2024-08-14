@@ -51,14 +51,20 @@ export default function AddTask({ onAdd }: AddTaskProps) {
     });
 
     // Função para submeter o formulário
-    const onSubmit = (data: FormData) => {
-        onAdd({
+    const onSubmit = async (data: FormData) => {
+        // Adiciona a tarefa e aguarda a conclusão
+        await onAdd({
             ...data,
             description: data.description ?? "", // Garante que a descrição seja uma string
             completed: false,
             createdAt: new Date().toISOString(),
         });
-        form.reset(); // Limpa o formulário após a submissão
+
+        // Exibe o toast após a tarefa ser adicionada com sucesso
+        toast("Tarefa adicionada à lista! ✅");
+
+        // Limpa o formulário após a submissão
+        form.reset();
     };
 
     // Função para lidar com o fechamento do Drawer
@@ -126,7 +132,7 @@ export default function AddTask({ onAdd }: AddTaskProps) {
                             />
 
                             <DrawerFooter>
-                                <Button type="submit" onClick={() => toast("Tarefa adicionada à lista! ✅")}>Adicionar</Button>
+                                <Button type="submit">Adicionar</Button>
                                 <DrawerClose asChild>
                                     <Button variant="outline" onClick={handleDrawerClose}>
                                         Cancelar

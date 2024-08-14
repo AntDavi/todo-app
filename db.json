@@ -1,11 +1,10 @@
-
 {
   "tasks": [
     {
       "id": "7dc1",
       "title": "Bem-vindo ao My ToDo-App",
       "description": "Você pode começar a adicionar Tasks ao seu feed para uma melhor organização das suas atividades diárias.",
-      "dueDate": "2024-08-30",
+      "dueDate": "2024-08-29",
       "completed": false,
       "createdAt": "2024-08-12T23:34:40.966Z"
     }
